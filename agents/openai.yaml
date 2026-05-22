@@ -1,8 +1,8 @@
 interface:
-  display_name: "Read Persona"
-  short_description: "Create elegant WeRead reading-persona HTML reports"
+  display_name: "阅读人格分析师"
+  short_description: "生成精致的微信读书阅读人格 HTML 报告"
   brand_color: "#8B5E3C"
-  default_prompt: "Use $read-persona to analyze my WeRead reading persona and generate a polished HTML report."
+  default_prompt: "使用 $read-persona 分析我的微信读书阅读人格，并生成一份精致的 HTML 报告。"
 
 policy:
   allow_implicit_invocation: true

@@ -1,84 +1,76 @@
-# Read Persona Report Template
+# 阅读人格报告模板说明
 
-Use this reference when generating the HTML report.
+生成 HTML 报告时，优先使用真正的模板文件：
 
-## Visual Direction
+```text
+assets/report-template.html
+```
 
-- Background: warm paper (`#f7f0e6`, `#fbf7ef`) with ink text (`#211a16`).
-- Accent palette: oxblood, muted moss, brass, deep indigo.
-- Typography: system serif for headings, system sans for labels and metrics.
-- Motifs: margins, rules, chapter labels, bookplate-like cards.
-- Avoid remote fonts, external images, and decorative blobs.
+本文件只用于补充说明视觉方向、主题选择、人格标签和章节结构。
 
-## Suggested Archetypes
+## 视觉方向
 
-Choose 2-4 based on data:
+- 背景：温暖纸页色，例如 `#f7f0e6`、`#fbf7ef`。
+- 文字：墨色正文，例如 `#211a16`。
+- 强调色：赭红、苔绿、黄铜、深靛蓝。
+- 字体：标题偏宋体/衬线，指标和标签使用系统无衬线。
+- 视觉母题：页边距、细分隔线、章节标题、藏书票式卡片。
+- 避免远程字体、外部图片、装饰性光球和花哨渐变。
 
-- Systems Reader: marks process, power, cause/effect, institutions, execution chains.
-- Technical Builder: reads programming, engineering, tooling, and implementation books.
-- Night Scholar: preference time clusters in late evening or after midnight.
-- Seasonal Sprinter: high reading years/months interrupted by quiet periods.
-- Annotation Forager: high note density, many glossary/context notes.
-- Historical Operator: reads history through institutions, logistics, and decision costs.
-- Reflective Romantic: recurring psychology, intimacy, and relationship reading.
-- Cosmic Engineer: blends science fiction with technical and scientific curiosity.
+## 内置主题
 
-## HTML Skeleton
+- `classic`：默认主题。纸页质感、藏书票式容器、阅读室氛围。
+- `modern`：极简、干净、适合分享。白色卡片、安静边框、较少复古感。
+
+在 `assets/report-template.html` 中，通过 body class 控制主题：
 
 ```html
-<!doctype html>
-<html lang="zh-CN">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>阅读人格报告</title>
-  <style>
-    :root {
-      --paper: #f7f0e6;
-      --paper-2: #fffaf1;
-      --ink: #211a16;
-      --muted: #6f6258;
-      --rule: #d8c7b0;
-      --accent: #8b3f2f;
-      --moss: #556b4e;
-      --brass: #a9783a;
-      --indigo: #26364f;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      background: var(--paper);
-      color: var(--ink);
-      font-family: "Noto Serif SC", "Songti SC", "SimSun", Georgia, serif;
-      line-height: 1.72;
-    }
-    .page { max-width: 1120px; margin: 0 auto; padding: 48px 24px 72px; }
-    .hero { border-bottom: 1px solid var(--rule); padding-bottom: 28px; }
-    .eyebrow { font: 700 12px/1.2 system-ui, sans-serif; letter-spacing: .16em; text-transform: uppercase; color: var(--accent); }
-    h1 { margin: 14px 0; font-size: clamp(36px, 7vw, 84px); line-height: 1.02; letter-spacing: 0; }
-    h2 { margin: 48px 0 18px; font-size: clamp(24px, 3vw, 38px); line-height: 1.15; }
-    .lede { max-width: 760px; font-size: 20px; color: var(--muted); }
-    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; }
-    .metric, .card {
-      background: color-mix(in srgb, var(--paper-2) 88%, white);
-      border: 1px solid var(--rule);
-      border-radius: 8px;
-      padding: 18px;
-    }
-    .metric { grid-column: span 3; }
-    .metric strong { display:block; font-size: 30px; line-height: 1.1; }
-    .metric span, .label { font: 700 12px/1.3 system-ui, sans-serif; color: var(--muted); }
-    .card { grid-column: span 4; }
-    .wide { grid-column: span 8; }
-    .full { grid-column: 1 / -1; }
-    .chip { display:inline-block; margin: 0 8px 8px 0; padding: 6px 10px; border:1px solid var(--rule); border-radius:999px; font: 700 13px system-ui, sans-serif; color: var(--indigo); }
-    @media (max-width: 760px) { .metric, .card, .wide { grid-column: 1 / -1; } .page { padding: 28px 16px 48px; } }
-  </style>
-</head>
-<body>
-  <main class="page">
-    <!-- Fill with report content. -->
-  </main>
-</body>
-</html>
+<body class="theme-classic">
 ```
+
+或：
+
+```html
+<body class="theme-modern">
+```
+
+## 建议人格标签
+
+根据数据选择 2-4 个，不要硬套。
+
+- **系统观察者**：关注流程、权力、因果、机构和执行链条。
+- **技术建造者**：阅读编程、工程、工具、实现类书籍较多。
+- **夜间学者**：阅读时段集中在晚上或凌晨。
+- **季节性冲刺者**：某些年份/月度阅读很强，中间有明显沉寂。
+- **注释采集者**：笔记密度高，经常查词、补背景、做标注。
+- **历史执行链读者**：读历史时关注制度、物流、财政、决策成本。
+- **反思型关系读者**：心理、亲密关系、自我理解类阅读信号明显。
+- **宇宙工程师**：科幻兴趣与技术/科学好奇相互交织。
+
+## 默认章节
+
+1. 开场：标题、日期、一句话画像。
+2. 一眼看见你：书架数量、阅读时长、阅读天数、读过/读完、笔记数。
+3. 阅读人格标签：3-5 个带证据的人格卡片。
+4. 阅读 DNA：分类偏好、作者偏好、主题偏好。
+5. 时间节律：偏好时段、年度趋势、活跃与沉寂。
+6. 注释心智：笔记密度、标注方式、思考模式。
+7. 代表性书目：读得最久或人格信号最强的书。
+8. 下一条阅读路径：推荐书或阅读任务。
+9. 数据说明：API、统计口径和限制。
+
+## HTML 占位符
+
+模板文件包含以下占位符：
+
+```text
+{{REPORT_TITLE}}
+{{THEME_CLASS}}
+{{EYEBROW}}
+{{TITLE}}
+{{LEDE}}
+{{META}}
+{{REPORT_BODY}}
+```
+
+生成时替换这些占位符。`{{REPORT_BODY}}` 应包含完整章节 HTML。

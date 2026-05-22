@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{REPORT_TITLE}}</title>
+  <style>
+    :root {
+      --paper: #f7f0e6;
+      --paper-2: #fffaf1;
+      --ink: #211a16;
+      --muted: #6f6258;
+      --rule: #d8c7b0;
+      --accent: #8b3f2f;
+      --moss: #556b4e;
+      --brass: #a9783a;
+      --indigo: #26364f;
+      --surface-shadow: rgba(59, 38, 24, 0.12);
+      --sans: system-ui, -apple-system, "Segoe UI", "Microsoft YaHei", sans-serif;
+      --serif: "Noto Serif SC", "Songti SC", "SimSun", Georgia, serif;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: var(--serif);
+      line-height: 1.72;
+    }
+    body.theme-classic {
+      background:
+        linear-gradient(90deg, rgba(139, 63, 47, .05) 0 1px, transparent 1px 100%),
+        linear-gradient(180deg, rgba(139, 63, 47, .035) 0 1px, transparent 1px 100%),
+        var(--paper);
+      background-size: 44px 44px;
+    }
+    body.theme-modern {
+      --paper: #f8f8f5;
+      --paper-2: #ffffff;
+      --ink: #171717;
+      --muted: #62625d;
+      --rule: #deded8;
+      --accent: #111111;
+      --moss: #5f6f62;
+      --brass: #9a743e;
+      --indigo: #33415f;
+      --surface-shadow: rgba(18, 18, 18, 0.08);
+      background: var(--paper);
+      font-family: "Noto Serif SC", "Songti SC", Georgia, serif;
+    }
+    .page { max-width: 1120px; margin: 0 auto; padding: 48px 24px 72px; }
+    .report-shell {
+      background: color-mix(in srgb, var(--paper-2) 92%, white);
+      border: 1px solid var(--rule);
+      box-shadow: 0 22px 60px var(--surface-shadow);
+      padding: clamp(22px, 4vw, 42px);
+    }
+    .theme-modern .report-shell {
+      border-radius: 18px;
+      border-color: transparent;
+      box-shadow: 0 24px 80px var(--surface-shadow);
+    }
+    .hero { border-bottom: 1px solid var(--rule); padding-bottom: 30px; }
+    .eyebrow {
+      font: 800 12px/1.2 var(--sans);
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    h1 {
+      margin: 14px 0 16px;
+      font-size: clamp(38px, 7vw, 86px);
+      line-height: 1.02;
+      letter-spacing: 0;
+      font-weight: 800;
+    }
+    h2 {
+      margin: 52px 0 18px;
+      font-size: clamp(24px, 3vw, 38px);
+      line-height: 1.16;
+    }
+    h3 { margin: 0 0 8px; font-size: 20px; line-height: 1.28; }
+    p { margin: 0 0 14px; }
+    .lede { max-width: 800px; font-size: 20px; color: var(--muted); }
+    .meta { margin-top: 22px; color: var(--muted); font-size: 14px; }
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; }
+    .metric, .card {
+      background: color-mix(in srgb, var(--paper-2) 88%, white);
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      padding: 18px;
+    }
+    .theme-modern .metric,
+    .theme-modern .card {
+      border-radius: 14px;
+      background: #fff;
+    }
+    .metric { grid-column: span 3; min-height: 112px; }
+    .metric strong { display:block; font-size: 30px; line-height: 1.1; margin-bottom: 8px; }
+    .metric span, .label {
+      font: 800 12px/1.3 var(--sans);
+      color: var(--muted);
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+    .card { grid-column: span 4; }
+    .wide { grid-column: span 8; }
+    .half { grid-column: span 6; }
+    .full { grid-column: 1 / -1; }
+    .chip {
+      display:inline-block;
+      margin: 0 8px 8px 0;
+      padding: 7px 11px;
+      border:1px solid var(--rule);
+      border-radius:999px;
+      font: 800 13px var(--sans);
+      color: var(--indigo);
+      background: rgba(255,255,255,.35);
+    }
+    .score {
+      display: grid;
+      grid-template-columns: 132px 1fr 44px;
+      gap: 12px;
+      align-items: center;
+      margin: 10px 0;
+      font: 700 13px var(--sans);
+    }
+    .bar { height: 10px; border-radius: 99px; background: #e5d5bf; overflow: hidden; }
+    .bar i { display: block; height: 100%; border-radius: inherit; background: var(--accent); }
+    .bar.moss i { background: var(--moss); }
+    .bar.brass i { background: var(--brass); }
+    .bar.indigo i { background: var(--indigo); }
+    .list { padding-left: 1.1em; margin: 0; }
+    .list li { margin: 8px 0; }
+    .quote {
+      margin: 0;
+      padding: 18px 20px;
+      border-left: 4px solid var(--accent);
+      background: rgba(139, 63, 47, .06);
+      color: #3b2a22;
+      font-size: 18px;
+    }
+    .theme-modern .quote {
+      background: #f2f2ef;
+      color: var(--ink);
+    }
+    .table { width: 100%; border-collapse: collapse; font-size: 15px; }
+    .table th, .table td { text-align: left; border-bottom: 1px solid var(--rule); padding: 10px 8px; vertical-align: top; }
+    .table th { color: var(--muted); font: 800 12px var(--sans); text-transform: uppercase; }
+    .timeline { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; align-items: end; min-height: 180px; }
+    .year { display: grid; grid-template-rows: 1fr auto auto; gap: 8px; height: 180px; }
+    .year .col { align-self: end; min-height: 2px; background: var(--indigo); border-radius: 6px 6px 2px 2px; }
+    .year b { font: 800 13px var(--sans); }
+    .year small { color: var(--muted); font: 700 11px var(--sans); }
+    .footer-note { color: var(--muted); font-size: 13px; border-top: 1px solid var(--rule); padding-top: 18px; }
+    @media (max-width: 760px) {
+      .page { padding: 24px 14px 48px; }
+      .report-shell { padding: 20px 16px; }
+      .metric, .card, .wide, .half { grid-column: 1 / -1; }
+      .score { grid-template-columns: 1fr; gap: 6px; }
+      .timeline { grid-template-columns: repeat(3, 1fr); }
+      .table { font-size: 14px; }
+    }
+  </style>
+</head>
+<body class="{{THEME_CLASS}}">
+  <main class="page">
+    <article class="report-shell">
+      <header class="hero">
+        <div class="eyebrow">{{EYEBROW}}</div>
+        <h1>{{TITLE}}</h1>
+        <p class="lede">{{LEDE}}</p>
+        <p class="meta">{{META}}</p>
+      </header>
+
+      {{REPORT_BODY}}
+    </article>
+  </main>
+</body>
+</html>

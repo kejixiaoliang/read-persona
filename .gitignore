@@ -1,0 +1,6 @@
+exports/
+persona-data*.json
+read-persona-report*.html
+*.log
+__pycache__/
+*.pyc
