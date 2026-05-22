@@ -1,0 +1,8 @@
+interface:
+  display_name: "Read Persona"
+  short_description: "Create elegant WeRead reading-persona HTML reports"
+  brand_color: "#8B5E3C"
+  default_prompt: "Use $read-persona to analyze my WeRead reading persona and generate a polished HTML report."
+
+policy:
+  allow_implicit_invocation: true
