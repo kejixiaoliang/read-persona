@@ -260,16 +260,6 @@ py C:\Users\<你的用户名>\.codex\skills\.system\skill-creator\scripts\quick_
 Skill is valid!
 ```
 
-## 许可证
-
-你可以按自己的开源计划选择许可证。
-
-推荐：
-
-- MIT License：适合宽松开源与二次创作
-- Apache-2.0：适合希望保留更明确专利授权条款的项目
-
-请在正式发布前补充 `LICENSE` 文件。
 
 ## 致谢
 
